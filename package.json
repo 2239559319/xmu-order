@@ -12,11 +12,15 @@
     "@rollup/plugin-typescript": "^11.1.2",
     "@types/jquery": "^3.5.16",
     "husky": "^8.0.3",
+    "lint-staged": "^13.2.3",
     "moment": "^2.29.4",
     "prettier": "^3.0.0",
     "rollup": "^3.27.0",
     "serve": "^14.2.0",
     "tslib": "^2.6.1",
     "typescript": "^5.1.6"
+  },
+  "lint-staged": {
+    "src/**/*": "prettier --write ."
   }
 }
