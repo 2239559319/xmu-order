@@ -23,20 +23,24 @@ function run(day: string, phoneNumber: string) {
   const timer = setInterval(async () => {
     try {
       const timeId = await getTimeId(day);
-      const res: any = await reserve({
-        userId,
-        reservers,
-        timeId,
-        timeRT,
-        token: null,
-        phoneNumber,
-      });
-
-      if (res === 'done') {
-        clearInterval(timer);
-        console.log('done');
+      if (!timeId) {
+        console.log('未开始');
       } else {
-        console.log(res);
+        const res: any = await reserve({
+          userId,
+          reservers,
+          timeId,
+          timeRT,
+          token: null,
+          phoneNumber,
+        });
+
+        if (res === 'done') {
+          clearInterval(timer);
+          console.log('done');
+        } else {
+          console.log(res);
+        }
       }
     } catch (error) {
       console.log(error);
@@ -44,4 +48,4 @@ function run(day: string, phoneNumber: string) {
   }, 500);
 }
 
-run('2023-08-02', '13072860887');
+run('2023-08-03', '13072860887');
