@@ -48,4 +48,4 @@ function run(day: string, phoneNumber: string) {
   }, 500);
 }
 
-run('2023-08-03', '13072860887');
+run('2023-08-03', '00000000000');
