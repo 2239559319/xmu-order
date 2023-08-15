@@ -1,12 +1,12 @@
 import moment from 'moment';
-import { userId } from './cleanObj';
+import { code, userId } from './cleanObj';
 import { reserve, getReservationTimeByMonth } from './http';
 
 async function getTimeId(day: string) {
   const momentDay = moment(day);
   const year = momentDay.format('YYYY');
   const month = momentDay.format('MM');
-  const arr = await getReservationTimeByMonth({ month, year, userId });
+  const arr = await getReservationTimeByMonth({ month, year, code });
 
   for (const { id, date } of arr) {
     if (date === day) {
@@ -28,11 +28,14 @@ function run(day: string, phoneNumber: string) {
       } else {
         const res: any = await reserve({
           userId,
+          code,
           reservers,
           timeId,
           timeRT,
-          token: null,
+          token: (<HTMLInputElement>document.querySelector('#sign')).value,
           phoneNumber,
+          // @ts-ignore
+          z: window[id].value,
         });
 
         if (res === 'done') {
@@ -45,7 +48,10 @@ function run(day: string, phoneNumber: string) {
     } catch (error) {
       console.log(error);
     }
-  }, 500);
+    clearInterval(timer);
+  }, 2000);
 }
 
-run('2023-08-03', '13072860887');
+window.onbeforeunload();
+
+run('2023-08-19', '13401312031');

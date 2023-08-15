@@ -26,13 +26,13 @@ export async function getReservedNumber(
 export async function getReservationTimeByMonth({
   month,
   year,
-  userId,
+  code,
 }: {
   month: string;
   year: string;
-  userId: string;
+  code: string;
 }): Promise<Array<ReservationTimeItem>> {
-  const url = `/${userId}/getReservationTimeByMonth`;
+  const url = `/${code}/getReservationTimeByMonth`;
   return new Promise((resolve, reject) => {
     $.ajax({
       url,
@@ -41,6 +41,9 @@ export async function getReservationTimeByMonth({
       data: {
         month,
         year,
+      },
+      headers: {
+        jH3jN7iM3kM6mD4mP5fE5eW6pB3dQ1dT: window.crf,
       },
       success(res) {
         const { reservationTime, success } = res;
@@ -59,20 +62,24 @@ export async function getReservationTimeByMonth({
 
 export async function reserve({
   userId,
+  code,
   reservers,
   timeId,
   timeRT,
   token,
   phoneNumber,
+  z,
 }: {
   userId: string;
+  code: string;
   reservers: string[];
   timeId: string;
   timeRT: string;
   token: string;
   phoneNumber: string;
+  z: string;
 }) {
-  const url = `/${userId}/reservation`;
+  const url = `/${code}/reservation`;
 
   return new Promise((resolve, reject) => {
     $.ajax({
@@ -85,6 +92,10 @@ export async function reserve({
         timeRT,
         token,
         phoneNumber,
+        z,
+      },
+      headers: {
+        jH3jN7iM3kM6mD4mP5fE5eW6pB3dQ1dT: window.crf,
       },
       success(res) {
         const { success } = res;

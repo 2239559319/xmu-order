@@ -1,6 +1,8 @@
 declare global {
   interface Window {
+    crf: string;
     cleanObj: Record<string, any>;
+    onbeforeunload: () => void;
   }
 }
 
@@ -13,6 +15,8 @@ export interface User {
   is_deleted: number;
   open_id: number;
   updatedAt: string;
+
+  getCode: () => string;
 }
 
 export interface ReservationTimeItem {
